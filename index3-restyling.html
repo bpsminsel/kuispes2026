@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Kuis Sensus Ekonomi 2026</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        terakota: {
+                            25: '#fff8f6',
+                            50: '#fef2f0',
+                            100: '#fde5e0',
+                            200: '#f9cbbf',
+                            500: '#d96b53', // Soft Terakota Elegan
+                            600: '#c2553d',
+                            700: '#a3422d',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-stone-50 via-terakota-25/40 to-stone-100 min-h-screen text-slate-800 antialiased flex flex-col justify-between selection:bg-terakota-500 selection:text-white">
+
+    <header class="bg-white/80 backdrop-blur-md border-b border-stone-200/60 sticky top-0 z-50 shadow-sm">
+        <div class="max-w-5xl mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center space-x-3">
+                <div class="bg-gradient-to-tr from-terakota-50 to-white p-1 rounded-xl shadow-sm border border-terakota-100 flex items-center justify-center">
+                  <img src="https://lh3.googleusercontent.com/d/16EYRkohpo-ksL6V3chLLyQ_OUrRVUdXB" alt="Logo SE2026" class="w-10 h-10 object-contain">
+                </div>
+            <div>
+                <h1 class="text-lg font-bold text-slate-900 tracking-tight leading-tight italic">POST ENUMERATION SURVEY (PES)</h1>
+                <p class="text-xs font-semibold text-terakota-600 tracking-wider uppercase">SENSUS EKONOMI 2026</p>
+            </div>
+        </div>
+            <div class="hidden sm:flex items-center space-x-2 text-xs bg-terakota-50 text-terakota-700 px-3 py-1.5 rounded-full font-semibold border border-terakota-100">
+                <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                <span>Server BPS Online</span>
+            </div>
+        </div>
+    </header>
+
+    <main class="flex-grow max-w-5xl w-full mx-auto px-4 py-6 flex flex-col justify-center">
+        
+        <!-- HALAMAN LOGIN -->
+        <div id="login-page" class="max-w-md w-full mx-auto bg-white/95 backdrop-blur-md rounded-3xl shadow-xl shadow-stone-200/40 border border-stone-200/60 p-8 transition-all duration-300">
+            <div class="text-center mb-8">
+                <div class="w-14 h-14 bg-gradient-to-tr from-terakota-100 to-terakota-50 text-terakota-600 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-inner border border-terakota-200/50">
+                    <i class="fa-solid fa-lock text-xl"></i>
+                </div>
+                <span class="bg-terakota-50 text-terakota-700 font-bold text-xs px-3 py-1 rounded-full uppercase tracking-widest border border-terakota-100">Autentikasi Petugas</span>
+                <h2 class="text-2xl font-bold text-slate-900 mt-2">Masuk Akun</h2>
+                <p class="text-sm text-stone-500 mt-1">Masukkan username dan password terdaftar Anda.</p>            
+            </div>
+
+            <form onsubmit="handleLogin(event)" class="space-y-5">
+                <div>
+                    <label class="block text-xs font-bold text-stone-700 uppercase tracking-wider mb-1.5" for="login-username">Username</label>
+                    <div class="relative">
+                        <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-stone-400">
+                            <i class="fa-solid fa-user"></i>
+                        </span>
+                        <input type="text" id="login-username" class="w-full pl-10 pr-4 py-3 bg-stone-50/80 border border-stone-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-terakota-500/20 focus:border-terakota-500 text-slate-900 font-medium placeholder-stone-400 transition-all text-sm" placeholder="Ketik username Anda..." required>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold text-stone-700 uppercase tracking-wider mb-1.5" for="login-password">Password</label>
+                    <div class="relative">
+                        <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-stone-400">
+                            <i class="fa-solid fa-lock"></i>
+                        </span>
+                        <input type="password" id="login-password" class="w-full pl-10 pr-4 py-3 bg-stone-50/80 border border-stone-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-terakota-500/20 focus:border-terakota-500 text-slate-900 font-medium placeholder-stone-400 transition-all text-sm" placeholder="••••••••" required>
+                    </div>
+                </div>
+
+                <div class="pt-2">
+                    <button type="submit" id="login-btn" class="w-full bg-terakota-500 hover:bg-terakota-600 text-white font-bold py-3.5 px-4 rounded-xl shadow-lg shadow-terakota-500/30 transition-all duration-150 flex items-center justify-center space-x-2 text-sm">
+                        <span>Masuk ke Portal</span>
+                        <i class="fa-solid fa-arrow-right text-xs"></i>
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <!-- HALAMAN IDENTITAS / PILIH TES -->
+        <div id="identitas-page" class="hidden max-w-md w-full mx-auto bg-white/95 backdrop-blur-md rounded-3xl shadow-xl shadow-stone-200/40 border border-stone-200/60 p-8 transition-all duration-300">
+            <div class="text-center mb-6">
+                <div class="w-14 h-14 bg-emerald-50 text-emerald-600 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-inner border border-emerald-100">
+                    <i class="fa-solid fa-user-check text-xl"></i>
+                </div>
+                <span class="bg-emerald-50 text-emerald-700 font-bold text-xs px-3 py-1 rounded-full uppercase tracking-widest border border-emerald-100">Login Berhasil</span>
+                <h2 id="welcome-name" class="text-xl font-bold text-slate-900 mt-2">Selamat Datang, Petugas</h2>
+                <p class="text-sm text-stone-500 mt-1">Silakan pilih jenis evaluasi yang ingin dikerjakan.</p>            
+            </div>
+
+            <div class="space-y-5">
+                <div>
+                    <label class="block text-xs font-bold text-stone-700 uppercase tracking-wider mb-1.5" for="jenis_tes">Jenis Evaluasi / Tes</label>
+                    <div class="relative">
+                        <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-stone-400">
+                            <i class="fa-solid fa-file-lines"></i>
+                        </span>
+                        <select id="jenis_tes" class="w-full pl-10 pr-4 py-3 bg-stone-50/80 border border-stone-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-terakota-500/20 focus:border-terakota-500 text-slate-900 font-medium cursor-pointer transition-all appearance-none text-sm">
+                            <option value="Pretest">Pretest (15 Menit)</option>
+                            <option value="Pendalaman" id="opt-pendalaman" disabled>Pendalaman Materi (45 Menit) 🔒</option>
+                            <option value="Posttest" id="opt-posttest" disabled>Posttest (15 Menit) 🔒</option>
+                        </select>
+                        <span class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none text-stone-400">
+                            <i class="fa-solid fa-chevron-down text-xs"></i>
+                        </span>
+                    </div>
+                    <p id="status-akses-info" class="text-xs text-amber-600 mt-2 font-medium bg-amber-50 p-2.5 rounded-xl border border-amber-100">Memeriksa status kelayakan tes...</p>
+                </div>
+
+                <div class="pt-2 space-y-2">
+                    <button id="start-btn" onclick="startQuiz()" class="w-full bg-terakota-500 hover:bg-terakota-600 text-white font-bold py-3.5 px-4 rounded-xl shadow-lg shadow-terakota-500/30 transition-all duration-150 flex items-center justify-center space-x-2 text-sm">
+                        <i class="fa-solid fa-circle-notch animate-spin mr-2 hidden" id="loading-icon"></i>
+                        <span>Mulai Tes</span>
+                    </button>
+
+                    <button type="button" onclick="bukaResiKumulatif()" class="w-full bg-slate-900 hover:bg-slate-800 text-white font-semibold py-3 px-4 rounded-xl shadow border border-slate-800 transition-all active:scale-[0.98] flex items-center justify-center space-x-2 text-sm">
+                        <i class="fa-solid fa-receipt text-terakota-400"></i>
+                        <span>Lihat Resi Hasil Evaluasi</span>
+                    </button>
+
+                    <button type="button" onclick="logout()" class="w-full bg-transparent hover:bg-stone-100 text-stone-500 font-semibold py-2 px-4 rounded-xl transition-all text-xs">
+                        Keluar Akun (Logout)
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- HALAMAN KUIS UTAMA -->
+        <div id="quiz-page" class="hidden flex-col md:flex-row gap-6 items-start w-full">
+            <div class="flex-grow w-full md:w-2/3 bg-white/95 backdrop-blur-md rounded-3xl shadow-xl shadow-stone-200/40 border border-stone-200/60 overflow-hidden">
+                <div class="bg-slate-900 text-white px-6 py-4 flex justify-between items-center">
+                    <div class="flex items-center space-x-2">
+                        <i class="fa-solid fa-id-badge text-terakota-400"></i>
+                        <span id="info-tes" class="text-sm font-semibold tracking-wide text-slate-200">Loading...</span>
+                    </div>
+                    <div class="bg-terakota-500/20 text-terakota-200 border border-terakota-500/30 px-3 py-1 rounded-lg font-bold text-base flex items-center space-x-2 tracking-wider shadow-inner">
+                        <i class="fa-solid fa-clock animate-pulse text-terakota-400"></i>
+                        <span id="timer">00:00</span>
+                    </div>
+                </div>
+
+                <div class="h-1.5 w-full bg-stone-100">
+                    <div id="progress" class="h-full bg-terakota-500 transition-all duration-300 shadow-sm" style="width: 0%"></div>
+                </div>
+
+                <div class="p-6 sm:p-8 min-h-[250px]">
+                    <div id="question-container"></div>
+                </div>
+
+                <div class="bg-stone-50/80 px-6 py-4 border-t border-stone-100 flex flex-wrap gap-3 justify-between items-center">
+                    <button id="prev-btn" onclick="prevQuestion()" class="px-5 py-2.5 bg-white border border-stone-200 hover:bg-stone-50 disabled:opacity-50 text-stone-700 font-bold rounded-xl transition-all flex items-center space-x-2 shadow-sm text-sm disabled:cursor-not-allowed">
+                        <i class="fa-solid fa-arrow-left"></i> <span>Sebelumnya</span>
+                    </button>
+                    
+                    <button id="ragu-btn" onclick="toggleRaguRagu()" class="px-5 py-2.5 bg-amber-50 border border-amber-200 text-amber-700 hover:bg-amber-100 font-bold rounded-xl transition-all flex items-center space-x-2 shadow-sm text-sm">
+                        <i class="fa-solid fa-flag"></i> <span>Ragu-Ragu</span>
+                    </button>
+                    
+                    <button id="next-btn" onclick="nextQuestion()" class="px-6 py-2.5 bg-terakota-500 hover:bg-terakota-600 text-white font-bold rounded-xl transition-all flex items-center space-x-2 shadow-md shadow-terakota-500/20 text-sm">
+                        <span>Selanjutnya</span> <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div class="w-full md:w-1/3 bg-white/95 backdrop-blur-md rounded-3xl shadow-xl shadow-stone-200/40 border border-stone-200/60 p-6">
+                <h3 class="text-sm font-bold text-slate-800 tracking-wider uppercase mb-4 flex items-center space-x-2">
+                    <i class="fa-solid fa-grip text-stone-400"></i>
+                    <span>Navigasi Soal</span>
+                </h3>
+                
+                <div class="grid grid-cols-5 gap-2.5" id="grid-nomor"></div>
+                
+                <div class="mt-6 pt-5 border-t border-stone-100 space-y-4">
+                    <div class="grid grid-cols-2 gap-2 text-xs font-semibold text-stone-500">
+                        <div class="flex items-center space-x-2"><span class="w-3.5 h-3.5 rounded bg-emerald-500"></span> <span>Terjawab</span></div>
+                        <div class="flex items-center space-x-2"><span class="w-3.5 h-3.5 rounded bg-amber-400"></span> <span>Ragu-Ragu</span></div>
+                        <div class="flex items-center space-x-2"><span class="w-3.5 h-3.5 rounded border border-stone-300 bg-white"></span> <span>Belum Diisi</span></div>
+                        <div class="flex items-center space-x-2"><span class="w-3.5 h-3.5 rounded ring-2 ring-slate-900 bg-stone-100"></span> <span>Aktif</span></div>
+                    </div>
+
+                    <button onclick="konfirmasiSelesai()" class="w-full mt-2 bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 px-4 rounded-xl shadow-lg shadow-emerald-600/20 transition-all active:scale-[0.98] flex items-center justify-center space-x-2 text-sm">
+                        <i class="fa-solid fa-check-double"></i>
+                        <span>Selesai Ujian</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- HALAMAN HASIL (RESULT) -->
+        <div id="result-page" class="hidden max-w-md w-full mx-auto bg-white/95 backdrop-blur-md rounded-3xl shadow-xl shadow-stone-200/40 border border-stone-200/60 p-8 text-center transition-all duration-500">
+            <div class="w-20 h-20 bg-gradient-to-tr from-terakota-100 to-terakota-50 rounded-3xl flex items-center justify-center mx-auto text-terakota-600 mb-6 shadow-inner border border-terakota-200/50 animate-bounce">
+                <i class="fa-solid fa-trophy fa-2xl"></i>
+            </div>
+            <h2 id="result-title" class="text-2xl font-bold text-slate-900">Selesai!</h2>
+            <div class="my-6 p-4 bg-stone-50 rounded-2xl border border-stone-200/60">
+                <p id="status-text" class="text-sm font-medium text-stone-600 leading-relaxed">
+                    Jawaban Anda sedang dikirim dan diproses aman oleh sistem database...
+                </p>
+            </div>
+            <button onclick="location.reload()" class="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold py-3.5 rounded-xl transition-all text-sm shadow-md">Kembali ke Beranda</button>
+        </div>
+
+    </main>
+
+    <!-- MODAL-MODAL PENDUKUNG -->
+    <div id="custom-alert-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-slate-900/50 backdrop-blur-sm p-4">
+        <div class="bg-white rounded-3xl max-w-sm w-full p-6 shadow-2xl border border-stone-200 text-center">
+            <div class="w-12 h-12 bg-amber-50 text-amber-500 rounded-2xl flex items-center justify-center mx-auto mb-4 border border-amber-100">
+                <i class="fa-solid fa-triangle-exclamation text-xl"></i>
+            </div>
+            <h3 class="text-lg font-bold text-slate-900 mb-1">Pemberitahuan</h3>
+            <p class="text-sm text-stone-600 mb-6">Pesan peringatan sistem...</p>
+            <button onclick="document.getElementById('custom-alert-modal').classList.add('hidden')" class="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold py-2.5 rounded-xl transition-all text-sm">Mengerti</button>
+        </div>
+    </div>
+
+    <div id="modal-soal-kosong" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-slate-900/50 backdrop-blur-sm p-4">
+        <div class="bg-white rounded-3xl max-w-sm w-full p-6 shadow-2xl border border-stone-200 text-center">
+            <div class="w-12 h-12 bg-amber-50 text-amber-500 rounded-2xl flex items-center justify-center mx-auto mb-4 border border-amber-100">
+                <i class="fa-solid fa-circle-exclamation text-xl"></i>
+            </div>
+            <h3 class="text-lg font-bold text-slate-900 mb-1">Masih Ada Soal Kosong</h3>
+            <p class="text-sm text-stone-600 mb-6">Harap periksa kembali navigasi nomor soal. Pastikan semua soal telah terjawab sebelum mengakhiri ujian.</p>
+            <button onclick="document.getElementById('modal-soal-kosong').classList.add('hidden')" class="w-full bg-amber-600 hover:bg-amber-700 text-white font-bold py-2.5 rounded-xl transition-all text-sm">Periksa Kembali</button>
+        </div>
+    </div>
+
+    <div id="modal-konfirmasi-submit" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-slate-900/50 backdrop-blur-sm p-4">
+        <div class="bg-white rounded-3xl max-w-sm w-full p-6 shadow-2xl border border-stone-200 text-center">
+            <div class="w-12 h-12 bg-emerald-50 text-emerald-600 rounded-2xl flex items-center justify-center mx-auto mb-4 border border-emerald-100">
+                <i class="fa-solid fa-clipboard-check text-xl"></i>
+            </div>
+            <h3 class="text-lg font-bold text-slate-900 mb-1">Kumpulkan Ujian?</h3>
+            <p class="text-sm text-stone-600 mb-6">Apakah Anda yakin ingin menyelesaikan ujian ini? Jawaban yang dikirim tidak dapat diubah kembali.</p>
+            <div class="flex space-x-3">
+                <button onclick="document.getElementById('modal-konfirmasi-submit').classList.add('hidden')" class="w-1/2 bg-stone-100 hover:bg-stone-200 text-stone-700 font-bold py-2.5 rounded-xl transition-all text-sm">Batal</button>
+                <button onclick="eksekusiSubmitAkhir()" class="w-1/2 bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-2.5 rounded-xl transition-all text-sm shadow-md">Ya, Kumpulkan</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Resi Kumulatif -->
+    <div id="modal-resi-kumulatif" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-slate-900/50 backdrop-blur-sm p-4">
+        <div class="bg-white rounded-3xl max-w-lg w-full p-6 shadow-2xl border border-stone-200">
+            <div class="text-center pb-4 border-b border-stone-100 mb-4">
+                <span class="text-xs font-bold uppercase tracking-widest text-terakota-600 bg-terakota-50 px-3 py-1 rounded-full border border-terakota-100">Resi Niali Petugas</span>
+                <h3 id="resi-nama" class="text-xl font-bold text-slate-900 mt-2">NAMA PESERTA</h3>
+                <p class="text-xs text-stone-500">Rekapitulasi Nilai Pelatihan Post Enumeration Survey (PES) SE 2026</p>
+            </div>
+            
+            <div class="space-y-3 mb-6">
+                <div class="flex items-center justify-between p-3.5 bg-stone-50/80 rounded-2xl border border-stone-200/60">
+                    <div>
+                        <div class="font-bold text-slate-800 text-sm">Pretest</div>
+                        <div id="resi-time-pretest" class="text-xs text-stone-400">--</div>
+                    </div>
+                    <div class="text-right">
+                        <div id="resi-score-pretest" class="text-lg font-extrabold text-terakota-600">--</div>
+                        <div id="resi-status-pretest" class="text-xs">--</div>
+                    </div>
+                </div>
+                <div class="flex items-center justify-between p-3.5 bg-stone-50/80 rounded-2xl border border-stone-200/60">
+                    <div>
+                        <div class="font-bold text-slate-800 text-sm">Pendalaman Materi</div>
+                        <div id="resi-time-pendalaman" class="text-xs text-stone-400">--</div>
+                    </div>
+                    <div class="text-right">
+                        <div id="resi-score-pendalaman" class="text-lg font-extrabold text-terakota-600">--</div>
+                        <div id="resi-status-pendalaman" class="text-xs">--</div>
+                    </div>
+                </div>
+                <div class="flex items-center justify-between p-3.5 bg-stone-50/80 rounded-2xl border border-stone-200/60">
+                    <div>
+                        <div class="font-bold text-slate-800 text-sm">Posttest</div>
+                        <div id="resi-time-posttest" class="text-xs text-stone-400">--</div>
+                    </div>
+                    <div class="text-right">
+                        <div id="resi-score-posttest" class="text-lg font-extrabold text-terakota-600">--</div>
+                        <div id="resi-status-posttest" class="text-xs">--</div>
+                    </div>
+                </div>
+            </div>
+
+            <button onclick="document.getElementById('modal-resi-kumulatif').classList.add('hidden')" class="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold py-3 rounded-xl transition-all text-sm shadow-md">Tutup Resi</button>
+        </div>
+    </div>
+
+    <footer class="bg-white/80 backdrop-blur-md text-stone-400 text-center py-4 text-xs font-medium border-t border-stone-200/60">
+        <div class="max-w-5xl mx-auto px-4 flex flex-col sm:flex-row justify-between items-center gap-2">
+            <div>© 2026 Badan Pusat Statistik Kabupaten Minahasa Selatan</div>
+            <div class="text-stone-500 text-[11px]">Sensus Ekonomi 2026 | Mencatat Ekonomi Indonesia</div>
+        </div>
+    </footer>
+
+<script>
+    const API_URL = "https://script.google.com/macros/s/AKfycbwYNiFiDItGAZAeqJx3DlMcePIEGZENHgO3A-hx2woVkSfM3pKLm0DQ0AwU8B9vdQpm/exec"; 
+
+    let gudangSoalMaster = []; 
+    let bankSoal = [];          
+    let currentQuestionIndex = 0;
+    let userAnswers = {};
+    let raguRaguStatus = {}; 
+    let dataSiswa = { nama: "", jenis_tes: "" };
+    let timerInterval;
+    let sisaWaktu = 0; 
+    let statusPengerjaan = { pretest: false, pendalaman: false, posttest: false };
+
+    window.onload = function() {
+        const loggedUser = localStorage.getItem("kuis_se2026_nama_user");
+        if (loggedUser) {
+            dataSiswa.nama = loggedUser;
+            document.getElementById('login-page').classList.add('hidden');
+            document.getElementById('identitas-page').classList.remove('hidden');
+            document.getElementById('welcome-name').innerText = `Selamat Datang, ${loggedUser}`;
+            
+            cekKelayakanTes(loggedUser);
+        }
+
+        fetch(API_URL)
+            .then(res => res.json())
+            .then(data => {
+                if (Array.isArray(data)) {
+                    gudangSoalMaster = data;
+                }
+            })
+            .catch(err => console.error("Gagal ambil soal:", err));
+    };
+
+    function cekKelayakanTes(namaUser) {
+        const urlAmbilResi = `${API_URL}?aksi=ambil_resi&nama=${encodeURIComponent(namaUser)}`;
+        const infoAkses = document.getElementById('status-akses-info');
+        const optPendalaman = document.getElementById('opt-pendalaman');
+        const optPosttest = document.getElementById('opt-posttest');
+
+        fetch(urlAmbilResi)
+        .then(res => res.json())
+        .then(resData => {
+            let pretestSelesai = resData.pretest.skor !== "--";
+            let pendalamanSelesai = resData.pendalaman.skor !== "--";
+            let posttestSelesai = resData.posttest.skor !== "--";
+
+            statusPengerjaan.pretest = pretestSelesai;
+            statusPengerjaan.pendalaman = pendalamanSelesai;
+            statusPengerjaan.posttest = posttestSelesai;
+
+            if (pretestSelesai) {
+                optPendalaman.disabled = false;
+                optPendalaman.innerText = "Pendalaman Materi (45 Menit)";
+            }
+
+            if (pendalamanSelesai) {
+                optPosttest.disabled = false;
+                optPosttest.innerText = "Posttest (15 Menit)";
+            }
+
+            if (!pretestSelesai) {
+                infoAkses.innerText = "Selesaikan Pretest terlebih dahulu untuk membuka Pendalaman Materi.";
+                infoAkses.className = "text-xs text-amber-600 mt-2 font-medium bg-amber-50 p-2.5 rounded-xl border border-amber-100";
+            } else if (pretestSelesai && !pendalamanSelesai) {
+                infoAkses.innerText = "Selesaikan Pendalaman Materi terlebih dahulu untuk membuka Posttest.";
+                infoAkses.className = "text-xs text-amber-600 mt-2 font-medium bg-amber-50 p-2.5 rounded-xl border border-amber-100";
+            } else if (pretestSelesai && pendalamanSelesai && !posttestSelesai) {
+                infoAkses.innerText = "Silakan selesaikan Posttest untuk menyelesaikan seluruh tahapan evaluasi.";
+                infoAkses.className = "text-xs text-stone-600 mt-2 font-medium bg-stone-100 p-2.5 rounded-xl border border-stone-200";
+            } else if (pretestSelesai && pendalamanSelesai && posttestSelesai) {
+                infoAkses.innerText = "Semua tahapan evaluasi telah selesai dikerjakan!";
+                infoAkses.className = "text-xs text-emerald-700 mt-2 font-bold bg-emerald-50 p-2.5 rounded-xl border border-emerald-100";
+            }
+        })
+        .catch(err => {
+            console.error("Gagal cek status kelayakan:", err);
+            infoAkses.innerText = "Gagal memuat status akses tes.";
+        });
+    }
+
+    function handleLogin(event) {
+        event.preventDefault();
+        const username = document.getElementById('login-username').value.trim();
+        const password = document.getElementById('login-password').value.trim();
+        const loginBtn = document.getElementById('login-btn');
+
+        loginBtn.innerHTML = `<i class="fa-solid fa-circle-notch animate-spin mr-2"></i> Memproses...`;
+        loginBtn.disabled = true;
+
+        fetch(API_URL, {
+            method: "POST",
+            body: JSON.stringify({ aksi: "login", username: username, password: password })
+        })
+        .then(res => res.json())
+        .then(resData => {
+            if (resData.status === "success") {
+                dataSiswa.nama = resData.nama;
+                localStorage.setItem("kuis_se2026_nama_user", resData.nama);
+                
+                document.getElementById('login-page').classList.add('hidden');
+                document.getElementById('identitas-page').classList.remove('hidden');
+                document.getElementById('welcome-name').innerText = `Selamat Datang, ${resData.nama}`;
+                
+                cekKelayakanTes(resData.nama);
+            } else {
+                showCustomAlert("Login Gagal", resData.message);
+                loginBtn.innerHTML = `<span>Masuk ke Portal</span><i class="fa-solid fa-arrow-right text-xs"></i>`;
+                loginBtn.disabled = false;
+            }
+        })
+        .catch(err => {
+            console.error(err);
+            showCustomAlert("Kesalahan", "Terjadi gangguan koneksi ke server.");
+            loginBtn.innerHTML = `<span>Masuk ke Portal</span><i class="fa-solid fa-arrow-right text-xs"></i>`;
+            loginBtn.disabled = false;
+        });
+    }
+
+    function logout() {
+        localStorage.removeItem("kuis_se2026_nama_user");
+        localStorage.removeItem("kuis_se2026_sesi");
+        location.reload();
+    }
+
+    function kocokArray(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+        return array;
+    }
+
+    function kocokOpsi(opsiArray) {
+        let salinan = [...opsiArray];
+        return kocokArray(salinan);
+    }
+
+    function startQuiz() {
+        const jenisDipilih = document.getElementById('jenis_tes').value;
+
+        if (jenisDipilih === "Pendalaman" && !statusPengerjaan.pretest) {
+            showCustomAlert("Akses Terkunci", "Anda harus menyelesaikan Pretest terlebih dahulu sebelum dapat mengakses Pendalaman Materi.");
+            return;
+        }
+        if (jenisDipilih === "Posttest" && !statusPengerjaan.pendalaman) {
+            showCustomAlert("Akses Terkunci", "Anda harus menyelesaikan Pendalaman Materi terlebih dahulu sebelum dapat mengakses Posttest.");
+            return;
+        }
+
+        const sesiTersimpan = localStorage.getItem("kuis_se2026_sesi");
+        if (sesiTersimpan) {
+            const confirmLanjut = confirm("Anda memiliki sesi kuis yang belum selesai. Lanjutkan sesi sebelumnya?");
+            if (confirmLanjut) {
+                const data = JSON.parse(sesiTersimpan);
+                dataSiswa = { nama: data.nama, jenis_tes: data.jenis_tes };
+                bankSoal = data.bankSoal;
+                userAnswers = data.userAnswers;
+                raguRaguStatus = data.raguRaguStatus;
+                sisaWaktu = data.sisaWaktu;
+                currentQuestionIndex = data.currentQuestionIndex;
+
+                document.getElementById('info-tes').innerText = `${dataSiswa.jenis_tes.toUpperCase()} • ${dataSiswa.nama}`;
+                document.getElementById('identitas-page').classList.add('hidden');
+                document.getElementById('quiz-page').classList.remove('hidden');
+                document.getElementById('quiz-page').classList.add('flex');
+                
+                buatGridNavigasi();
+                showQuestion();
+                startTimer();
+                return; 
+            } else {
+                localStorage.removeItem("kuis_se2026_sesi"); 
+            }
+        }
+        
+        dataSiswa.jenis_tes = jenisDipilih;
+
+        if (gudangSoalMaster.length === 0) {
+            showCustomAlert("Data Belum Siap", "Soal belum dimuat dari database. Mohon tunggu sejenak.");
+            return;
+        }
+        
+        let kategoriFilter = (dataSiswa.jenis_tes === "Pendalaman") ? "pendalaman" : "objektif";
+        let soalTersaring = gudangSoalMaster.filter(soal => soal.kategori.toLowerCase() === kategoriFilter);
+
+        if (soalTersaring.length === 0) {
+            showCustomAlert("Data Kosong", "Bank soal untuk kategori ini belum tersedia.");
+            return;
+        }
+
+        let soalAcak = kocokArray([...soalTersaring]);
+        let jumlahTarget = (dataSiswa.jenis_tes === "Pendalaman") ? 30 : 20;
+
+        bankSoal = soalAcak.slice(0, jumlahTarget);
+        
+        currentQuestionIndex = 0;
+        userAnswers = {};
+        raguRaguStatus = {}; 
+        sisaWaktu = (dataSiswa.jenis_tes === "Pendalaman") ? (45 * 60) : (15 * 60);
+        
+        simpanSesiKeStorage(); 
+        
+        document.getElementById('info-tes').innerText = `${dataSiswa.jenis_tes.toUpperCase()} • ${dataSiswa.nama}`;
+        document.getElementById('identitas-page').classList.add('hidden');
+        document.getElementById('quiz-page').classList.remove('hidden');
+        document.getElementById('quiz-page').classList.add('flex');
+        
+        buatGridNavigasi();
+        showQuestion();
+        startTimer();
+    }
+
+    function showCustomAlert(title, message) {
+        const modal = document.getElementById('custom-alert-modal');
+        if (modal) {
+            modal.querySelector('h3').innerText = title;
+            modal.querySelector('p.text-sm').innerText = message;
+            modal.classList.remove('hidden');
+        } else {
+            alert(title + ": " + message);
+        }
+    }
+
+    function startTimer() {
+        updateTimerDisplay();
+        timerInterval = setInterval(() => {
+            sisaWaktu--;
+            updateTimerDisplay();
+            if (sisaWaktu % 5 === 0) simpanSesiKeStorage();
+            if (sisaWaktu <= 0) {
+                clearInterval(timerInterval);
+                alert("Waktu habis! Jawaban Anda akan otomatis dikirim.");
+                submitQuiz();
+            }
+        }, 1000);
+    }
+
+    function updateTimerDisplay() {
+        let menit = Math.floor(sisaWaktu / 60);
+        let detik = sisaWaktu % 60;
+        document.getElementById('timer').innerText = (menit < 10 ? "0" : "") + menit + ":" + (detik < 10 ? "0" : "") + detik;
+    }
+
+    function buatGridNavigasi() {
+        let gridHtml = "";
+        for (let i = 0; i < bankSoal.length; i++) {
+            gridHtml += `<button type="button" id="nav-${i}" onclick="lompatKeSoal(${i})" class="h-11 rounded-xl border border-stone-200 font-bold text-sm transition-all duration-150 flex items-center justify-center focus:outline-none bg-white shadow-sm hover:border-terakota-500">${i + 1}</button>`;
+        }
+        document.getElementById('grid-nomor').innerHTML = gridHtml;
+    }
+
+    function updateStatusNavigasi() {
+        for (let i = 0; i < bankSoal.length; i++) {
+            let el = document.getElementById(`nav-${i}`);
+            if (!el) continue;
+            let qId = bankSoal[i].id;
+            
+            el.className = "h-11 rounded-xl font-bold text-sm transition-all duration-150 flex items-center justify-center focus:outline-none shadow-sm border";
+            
+            if (raguRaguStatus[qId]) {
+                el.classList.add("bg-amber-400", "text-white", "border-amber-400");
+            } else if (userAnswers[qId]) {
+                el.classList.add("bg-emerald-500", "text-white", "border-emerald-500");
+            } else {
+                el.classList.add("bg-white", "text-stone-700", "border-stone-200", "hover:border-stone-400");
+            }
+
+            if (i === currentQuestionIndex) {
+                el.classList.add("ring-2", "ring-slate-900", "ring-offset-2");
+            }
+        }
+    }
+
+    function showQuestion() {
+        if (bankSoal.length === 0) return;
+        const currentQuestion = bankSoal[currentQuestionIndex];
+        if (!currentQuestion.optionsDiacak) {
+            currentQuestion.optionsDiacak = kocokOpsi(currentQuestion.options);
+        }
+        const pilihanJawaban = currentQuestion.optionsDiacak;
+        const progressPercent = ((currentQuestionIndex + 1) / bankSoal.length) * 100;
+        document.getElementById('progress').style.width = progressPercent + '%';
+
+        let html = `
+            <div class="flex items-center space-x-2 text-xs font-bold text-terakota-600 tracking-wider uppercase mb-1.5">
+                <span>Pertanyaan</span> 
+                <span class="bg-terakota-50 px-2.5 py-0.5 rounded-md border border-terakota-100">${currentQuestionIndex + 1} dari ${bankSoal.length}</span>
+            </div>
+            <p class="text-base sm:text-lg font-semibold text-slate-900 leading-relaxed mb-6">${currentQuestion.question}</p>
+            <div class="space-y-3.5">
+        `;
+
+        pilihanJawaban.forEach(opt => {
+            let checked = (userAnswers[currentQuestion.id] === opt) ? "checked" : "";
+            let bgPilihan = (userAnswers[currentQuestion.id] === opt) ? "bg-terakota-25 border-terakota-500 text-slate-900 ring-1 ring-terakota-500 shadow-sm" : "bg-white border-stone-200 hover:bg-stone-50 text-stone-700";
+            
+            html += `
+                <label class="option-label group border ${bgPilihan} px-4 py-3.5 rounded-xl cursor-pointer transition-all flex items-center space-x-3.5 shadow-sm">
+                    <input type="radio" name="answer" value="${opt}" ${checked} onchange="simpanJawabanLokal('${currentQuestion.id}', '${opt}')" class="w-4 h-4 text-terakota-500 border-stone-300 focus:ring-terakota-500 accent-terakota-500"> 
+                    <span class="text-sm font-medium leading-normal">${opt}</span>
+                </label>
+            `;
+        });
+        html += `</div>`;
+
+        document.getElementById('question-container').innerHTML = html;
+        document.getElementById('prev-btn').disabled = (currentQuestionIndex === 0);
+        
+        if (currentQuestionIndex === bankSoal.length - 1) {
+            document.getElementById('next-btn').innerHTML = `<span>Selesai</span> <i class="fa-solid fa-flag-checkered ml-1"></i>`;
+            document.getElementById('next-btn').className = "px-6 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl transition-all flex items-center space-x-2 shadow-md text-sm";
+        } else {
+            document.getElementById('next-btn').innerHTML = `<span>Selanjutnya</span> <i class="fa-solid fa-arrow-right"></i>`;
+            document.getElementById('next-btn').className = "px-6 py-2.5 bg-terakota-500 hover:bg-terakota-600 text-white font-bold rounded-xl transition-all flex items-center space-x-2 shadow-md shadow-terakota-500/20 text-sm";
+        }
+
+        updateStatusNavigasi();
+    }
+
+    function simpanJawabanLokal(soalId, nilaiJawaban) {
+        userAnswers[soalId] = nilaiJawaban;
+        updateStatusNavigasi();
+        simpanSesiKeStorage(); 
+        showQuestion(); 
+    }
+
+    function simpanSesiKeStorage() {
+        const payloadSesi = {
+            nama: dataSiswa.nama,
+            jenis_tes: dataSiswa.jenis_tes,
+            bankSoal: bankSoal,
+            userAnswers: userAnswers,
+            raguRaguStatus: raguRaguStatus,
+            sisaWaktu: sisaWaktu,
+            currentQuestionIndex: currentQuestionIndex
+        };
+        localStorage.setItem("kuis_se2026_sesi", JSON.stringify(payloadSesi));
+    }
+
+    function toggleRaguRagu() {
+        if (bankSoal.length === 0) return;
+        const currentQuestion = bankSoal[currentQuestionIndex];
+        let qId = currentQuestion.id;
+        raguRaguStatus[qId] = !raguRaguStatus[qId];
+        updateStatusNavigasi();
+        simpanSesiKeStorage();
+    }
+
+    function nextQuestion() {
+        if (currentQuestionIndex < bankSoal.length - 1) {
+            currentQuestionIndex++;
+            showQuestion();
+        } else {
+            konfirmasiSelesai();
+        }
+    }
+
+    function prevQuestion() {
+        if (currentQuestionIndex > 0) {
+            currentQuestionIndex--;
+            showQuestion();
+        }
+    }
+
+    function lompatKeSoal(index) {
+        currentQuestionIndex = index;
+        showQuestion();
+    }
+
+    function konfirmasiSelesai() {
+        let totalSoal = bankSoal.length;
+        let jumlahTerjawab = Object.keys(userAnswers).length;
+        let soalBelumDijawab = totalSoal - jumlahTerjawab;
+
+        if (soalBelumDijawab > 0) {
+            document.getElementById('modal-soal-kosong').classList.remove('hidden');
+            return; 
+        }
+
+        document.getElementById('modal-konfirmasi-submit').classList.remove('hidden');
+    }
+
+    function eksekusiSubmitAkhir() {
+        document.getElementById('modal-konfirmasi-submit').classList.add('hidden');
+        clearInterval(timerInterval); 
+        submitQuiz(); 
+    }
+
+    function submitQuiz() {
+        localStorage.removeItem("kuis_se2026_sesi");
+
+        document.getElementById('quiz-page').className = "hidden";
+        document.getElementById('result-page').classList.remove('hidden');
+
+        let jawabanFinalKirim = { ...userAnswers };
+
+        gudangSoalMaster.forEach(soal => {
+            if (soal.kategori === "pendalaman") {
+                if (!jawabanFinalKirim[soal.id]) {
+                    jawabanFinalKirim[soal.id] = "Tidak Mendapatkan Soal Ini";
+                }
+            }
+        });
+
+        const payload = {
+            nama: dataSiswa.nama,
+            jenis_tes: dataSiswa.jenis_tes,
+            jawaban: jawabanFinalKirim
+        };
+
+        fetch(API_URL, {
+            method: "POST",
+            body: JSON.stringify(payload)
+        })
+        .then(res => res.json())
+        .then(resData => {
+            if(resData.status === "success") {
+                document.getElementById('status-text').innerHTML = `<span class="text-slate-800 text-lg font-bold block mb-1">Berhasil Disimpan</span> Jawaban berhasil terekam aman ke database<br><span class="inline-block mt-3 bg-terakota-50 text-terakota-700 font-extrabold text-xl px-5 py-2.5 rounded-2xl border border-terakota-200 shadow-sm">SKOR ANDA: ${resData.skor.toFixed(2)}</span>`;
+            } else {
+                document.getElementById('status-text').innerText = "Gagal menyimpan: " + resData.message;
+            }
+        })
+        .catch(err => {
+            document.getElementById('status-text').innerText = "Terjadi kesalahan jaringan saat mengirim jawaban.";
+            console.error(err);
+        });
+    }
+
+    function bukaResiKumulatif() {
+        let namaUser = dataSiswa.nama;
+        
+        document.getElementById('resi-nama').innerText = "MENCOCOKKAN DATABASE...";
+        document.getElementById('modal-resi-kumulatif').classList.remove('hidden');
+        
+        const urlAmbilResi = `${API_URL}?aksi=ambil_resi&nama=${encodeURIComponent(namaUser)}`;
+
+        fetch(urlAmbilResi)
+        .then(res => res.json())
+        .then(resData => {
+            document.getElementById('resi-nama').innerText = resData.nama.toUpperCase();
+            
+            document.getElementById('resi-score-pretest').innerText = resData.pretest.skor;
+            document.getElementById('resi-time-pretest').innerText = resData.pretest.waktu;
+            document.getElementById('resi-status-pretest').innerHTML = (resData.pretest.skor !== "--") ? '<span class="text-emerald-600 font-bold">SELESAI</span>' : '<span class="text-stone-400 font-medium">BELUM</span>';
+
+            document.getElementById('resi-score-pendalaman').innerText = resData.pendalaman.skor;
+            document.getElementById('resi-time-pendalaman').innerText = resData.pendalaman.waktu;
+            document.getElementById('resi-status-pendalaman').innerHTML = (resData.pendalaman.skor !== "--") ? '<span class="text-emerald-600 font-bold">SELESAI</span>' : '<span class="text-stone-400 font-medium">BELUM</span>';
+
+            document.getElementById('resi-score-posttest').innerText = resData.posttest.skor;
+            document.getElementById('resi-time-posttest').innerText = resData.posttest.waktu;
+            document.getElementById('resi-status-posttest').innerHTML = (resData.posttest.skor !== "--") ? '<span class="text-emerald-600 font-bold">SELESAI</span>' : '<span class="text-stone-400 font-medium">BELUM</span>';
+        })
+        .catch(err => {
+            console.error("Gagal sinkronisasi data multi-tab:", err);
+            document.getElementById('modal-resi-kumulatif').classList.add('hidden');
+            alert("Gagal menarik data dari server.");
+        });
+    }
+</script>
+</body>
+</html>
